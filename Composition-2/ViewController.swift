@@ -31,6 +31,8 @@ class ViewController: UIViewController {
         
     }()
     
+    private let sections = MockData.shared.pageData
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -63,16 +65,33 @@ extension ViewController: UICollectionViewDelegate {
     
 }
 
+//MARK: - UICollectionViewDataSource
+
 extension ViewController: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        sections.count
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        
-        return 0
+        sections[section].count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
+        switch sections[indexPath.section] {
+        case .sales(let sale) :
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoriesCollectionViewCell", for: indexPath) as? SaleCollectionViewCell else {return .init()}
+            cell.configureCell(imageName: sale[indexPath.row].imageName)
+            return cell
+        case.cathegory(let cathegory):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCollectionViewCell", for: indexPath) as? CathegoryCollectionViewCell else {return .init()}
+            cell.configureCell(cathegoryName: cathegory[indexPath.row].title, imageName: cathegory[indexPath.row].imageName)
+        case .example(let example):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ComingSoonCollectionViewCell", for: indexPath) as? ExampleCollectionViewCell else {return .init()}
+            cell.configureCell(imageName: example[indexPath.row].imageName)
+            return cell
+        }
         return .init()
     }
     
