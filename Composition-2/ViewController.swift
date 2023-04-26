@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
     
@@ -20,12 +21,26 @@ class ViewController: UIViewController {
         return button
         
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
+        setConstraints()
         
     }
-
-
+    
+    private func setupViews() {
+        view.backgroundColor = .systemBackground
+        title = "FoodShop"
+        view.addSubview(orderButton)
+    }
+    
+    private func setConstraints() {
+        orderButton.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview().inset(30)
+            make.height.equalTo(60)
+            
+        }
+        
+    }
 }
-
