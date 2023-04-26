@@ -36,6 +36,16 @@ class ExampleCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private let priceLabel: UILabel = {
+       let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "$7.47"
+        label.textAlignment = .center
+        label.font = UIFont(name: "Arial", size: 24)
+        label.textColor = .red
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -48,14 +58,35 @@ class ExampleCollectionViewCell: UICollectionViewCell {
     }
     
     func setupView() {
-        backgroundColor = .systemBackground
+        clipsToBounds = true
+        layer.cornerRadius = 10
+        
         addSubview(burgerImageView)
+        addSubview(backgroundTitleView)
+        addSubview(nameLabel)
+        addSubview(priceLabel)
     }
     
     func setConstraints() {
         burgerImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        backgroundTitleView.snp.makeConstraints { make in
+            make.bottom.leading.trailing.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.1)
+        }
+        
+        nameLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(backgroundTitleView)
+            make.leading.equalTo(backgroundTitleView).inset(10)
+        }
+        
+        priceLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(backgroundTitleView)
+            make.trailing.equalTo(backgroundTitleView).inset(-10)
+        }
+        
     }
     
     func configureCell(imageName: String) {
