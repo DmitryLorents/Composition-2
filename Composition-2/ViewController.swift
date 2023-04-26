@@ -10,6 +10,15 @@ import SnapKit
 
 class ViewController: UIViewController {
     
+    private let collectionView: UICollectionView = {
+        let collectionViewLayout = UICollectionViewLayout()
+        let collectionview = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+        collectionview.translatesAutoresizingMaskIntoConstraints = false
+        collectionview.backgroundColor = .none
+        collectionview.bounces = false
+        return collectionview
+    }()
+    
     private let orderButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Make an order", for: .normal)
@@ -26,6 +35,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setConstraints()
+        setDelegates()
         
     }
     
@@ -41,6 +51,30 @@ class ViewController: UIViewController {
             make.height.equalTo(60)
             
         }
-        
     }
+    
+    private func setDelegates() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
+}
+
+extension ViewController: UICollectionViewDelegate {
+    
+}
+
+extension ViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        
+        return .init()
+    }
+    
+    
 }
