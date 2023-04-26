@@ -12,9 +12,28 @@ class ExampleCollectionViewCell: UICollectionViewCell {
     
     private let burgerImageView: UIImageView = {
        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "burger1")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
+    }()
+    
+    private let backgroundTitleView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.alpha = 0.6
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Egg Top Burger"
+        label.textAlignment = .center
+        label.font = UIFont(name: "Arial", size: 16)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     override init(frame: CGRect) {
