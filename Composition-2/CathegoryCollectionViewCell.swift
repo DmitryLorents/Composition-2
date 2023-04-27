@@ -59,7 +59,7 @@ class CathegoryCollectionViewCell: UICollectionViewCell {
     func setConstraints() {
         
         cathegoryLabel.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview().inset(5)
+            make.bottom.leading.equalToSuperview().inset(5)
             make.trailing.equalToSuperview().inset(-5)
             make.height.equalTo(16)
         
@@ -67,7 +67,7 @@ class CathegoryCollectionViewCell: UICollectionViewCell {
         
         cathegoryImageView.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().inset(5)
-            make.bottom.equalToSuperview().inset(-5)
+            make.trailing.equalToSuperview().inset(-5)
             make.bottom.equalTo(cathegoryLabel.snp.top)
         }
         
