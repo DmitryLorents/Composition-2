@@ -45,14 +45,24 @@ class ViewController: UIViewController {
         view.backgroundColor = .systemBackground
         title = "FoodShop"
         view.addSubview(orderButton)
+        view.addSubview(collectionView)
+        collectionView.register(SaleCollectionViewCell.self, forCellWithReuseIdentifier: "StoriesCollectionViewCell")
+        collectionView.register(CathegoryCollectionViewCell.self, forCellWithReuseIdentifier: "PopularCollectionViewCell")
+        collectionView.register(ExampleCollectionViewCell.self, forCellWithReuseIdentifier: "ComingSoonCollectionViewCell")
     }
     
     private func setConstraints() {
         orderButton.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview().inset(30)
             make.height.equalTo(60)
-            
         }
+        
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(orderButton.snp.top).inset(-10)
+        }
+        
     }
     
     private func setDelegates() {
@@ -93,6 +103,18 @@ extension ViewController: UICollectionViewDataSource {
             return cell
         }
         return .init()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! HeaderSupplementaryView
+            header.configureHeader(cathegoryName: sections[indexPath.section].title)
+            return header
+        default: return UICollectionReusableView()
+        }
+        
     }
     
     
