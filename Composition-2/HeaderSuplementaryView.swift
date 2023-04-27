@@ -35,7 +35,10 @@ class HeaderSupplementaryView: UICollectionReusableView {
     }
     
     private func setConstraints() {
-        
+        headerLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().inset(10)
+        }
     }
     
 }
